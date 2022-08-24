@@ -6,9 +6,9 @@ string[] arr2 = { "car", "bmw", "mercedes" };
 Console.WriteLine(MoreThanElement(arr));
 Console.WriteLine(ArrayContainElement(arr, "eleman1"));
 GetArrayElement(arr);
-GetArrayStarElment(arr, 'a');
+GetArrayStarElment(arr, "a");
 int[] a = { 1, 3, 4, 2, 4, 2 };
-int[] b = { 3, 1, 5, 6, 7, 2 };
+int[] b = { 3, 1, 5, 6, 7 };
 CreateDiffirentElementArray(a, b);
 #endregion
 
@@ -22,6 +22,7 @@ bool MoreThanElement(string[] array)
 
     return result;
 }
+
 #endregion
 
 #region Task2
@@ -54,7 +55,7 @@ void GetArrayElement(string[] array, int i = 0)
 #region Task4
 //metinsel bir dizi içerisindeki değerlerde,  verdiğiniz değer ile başlayan tüm elemanları ekrana yazdırınız.
 
-void GetArrayStarElment(string[] array, char startelemt)
+void GetArrayStarElment(string[] array, string startelemt)
 {
     string[] result = Array.FindAll(array, element => element.StartsWith(startelemt));
     GetArrayElement(result);
@@ -78,19 +79,16 @@ void GetTwoArrayElment(string[] arr, string[] arr2)
 void CreateDiffirentElementArray(int[] arr, int[] arr2)
 {
     int[] someResult;
-    int[] diffirentResult;
+    
 
-    var diffirent = arr.Union(arr2).Except(arr.Intersect(arr2));
+    int[] diffirent = arr.Union(arr2).Except(arr.Intersect(arr2)).ToArray();
+    
     if (arr.Length > arr2.Length)
     {
         someResult = Array.FindAll(arr, element =>
        Array.Exists(arr2, element2 => element.Equals(element2)));
 
 
-        diffirentResult = new int[arr.Length + arr2.Length - someResult.Length];
-        diffirentResult =
-           Array.FindAll(arr, element =>
-           !Array.Exists(arr2, element2 => element.Equals(element2)));
 
     }
     else
@@ -100,9 +98,7 @@ void CreateDiffirentElementArray(int[] arr, int[] arr2)
 
 
 
-        diffirentResult =
-            Array.FindAll(arr2, element =>
-            !Array.Exists(arr, element2 => element.Equals(element2)));
+       
     }
 
 
